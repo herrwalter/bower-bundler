@@ -1,0 +1,25 @@
+{
+  "name": "Bower bundler",
+  "version": "0.0.0",
+  "authors": [
+    "Wouter Wessendorp <wouter.wessendorp@trimm.nl>"
+  ],
+  "description": "Bower test file",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-google-analytics": "0.0.16",
+    "greensock": "~1.16.1",
+    "Chart.js": "~1.0.2",
+    "Chart.StackedBar.js": "~1.0.3",
+    "js-cookie": "latest",
+    "ng-wig": "3.0.1",
+    "angular-mocks": "^1.5.6"
+  }
+}

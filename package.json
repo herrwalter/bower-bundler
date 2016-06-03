@@ -1,0 +1,14 @@
+{
+  "name": "bowerify",
+  "version": "0.0.0",
+  "description": "Bower packaging compiler",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concat-files": "^0.1.0"
+  }
+}
