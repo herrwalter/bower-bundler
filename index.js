@@ -1,13 +1,23 @@
+var argv = require('optimist').argv;
+
 var fs = require("fs");
-var bowerFile = require("./bower.json");
-var priorityOrder = [];
+var path = require("path");
+var concat = require("concat-files");
 
-var bowerLibraryPath = "./bower_components";
-var pathToDist = "./dist/lib/";
-var bundleName = "bowerify-bundle";
+var bowerLibraryPath = argv.libraryPath || "./bower_components";
+var pathToDist = argv.distPath || "./dist/lib/";
+var bundleName = argv.bundleName || "bower-bundle";
+var bowerFileLocation = argv.bowerFile || "./bower.json";
 
+if( path.extname(bowerFileLocation) != ".json"){
+    throw new Error("Your bower file must end with .json");
+}
+
+var bowerFile = require(bowerFileLocation);
 var dependencyBowers = {};
+var priorityOrder = [];
 var bowerDependencies = bowerFile.dependencies;
+
 
 var addBowerfile = function (dependencyName) {
     var dependencyBower = require(bowerLibraryPath + "/" + dependencyName + "/.bower.json");
@@ -49,42 +59,32 @@ if(bowerDependencies){
 
     }
 
-    var concat = require("concat-files");
-    // find all the main paths
-    var dependencyMainJSPaths = [];
-    var dependencyMainCssPaths = [];
+    var dependencyMainPaths = {};
     for( var index in priorityOrder ){
         var dependencyName = priorityOrder[index];
         var dependencyBower = dependencyBowers[dependencyName];
 
         if(  typeof dependencyBower.main == "string" ){
-            var path = dependencyBower.main;
-            if( path.indexOf(".js") ){
-                dependencyMainJSPaths.push(bowerLibraryPath + "/" + dependencyName + "/" + path);
-            }
-            if( path.indexOf(".css") ){
-                dependencyMainCssPaths.push(bowerLibraryPath + "/" + dependencyName + "/" + path);
-            }
+            var libraryPath = dependencyBower.main;
+            saveMainFile(bowerLibraryPath + "/" + dependencyName + "/" + libraryPath);
         }
         if( dependencyBower.main instanceof Array){
-            var paths = dependencyBower.main;
-            for( var index in paths){
-                var path = paths[index];
-                if ( path.indexOf(".js") ){
-                    dependencyMainJSPaths.push(bowerLibraryPath + "/" + dependencyName + "/" + path);
-                }
-                if( path.indexOf(".css") ){
-                    dependencyMainCssPaths.push(bowerLibraryPath + "/" + dependencyName + "/" + path);
-                }
+            for( var mainIndex in dependencyBower.main){
+                var libraryPath = dependencyBower.main[mainIndex];
+                saveMainFile(bowerLibraryPath + "/" + dependencyName + "/" + libraryPath);
             }
         }
     }
 
-    if( dependencyMainJSPaths.length > 0 ){
-        concat(dependencyMainJSPaths, pathToDist + bundleName + ".js");
+    function saveMainFile(libraryPath){
+        if( !dependencyMainPaths[path.extname(libraryPath)] instanceof Array){
+            dependencyMainPaths[path.extname(libraryPath)] = [];
+        }
+        dependencyMainPaths[path.extname(libraryPath)].push(libraryPath);
     }
-    if( dependencyMainCssPaths > 0 ){
-        concat(dependencyMainCssPaths, pathToDist + bundleName + ".css");
+
+    for( var fileType in dependencyMainPaths ){
+        concat(dependencyMainPaths[fileType], pathToDist + bundleName + fileType);
     }
 }
 
