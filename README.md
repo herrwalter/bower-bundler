@@ -1,13 +1,15 @@
-*Installation*
+**bower-bundler**
+This plugin will help you bundle your bower libraries to a giving path with the knowledge of the dependecy priorities.
+
+**Installation**
 
 ```
 npm install -g bower-bundler
 ```
 
 
-*Usage*
+**Usage**
 
-This plugin will help you bundle your bower libraries.
 When you have node installed, simply use `bower-bundler` in the root folder where you're bower file is located.
 
 If your bower file is located somewhere else than default "./bower.json" use
@@ -33,3 +35,9 @@ The bundle will be distributed by default in the same folder. That's not what I 
 ```
 bower-bundler --dist="path/to/dist"
 ```
+
+**Bugs?**
+Please create an issue
+
+**Pull requests welcome**
+
