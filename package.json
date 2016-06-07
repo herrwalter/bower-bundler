@@ -1,14 +1,20 @@
 {
-  "name": "bowerify",
-  "version": "0.0.0",
-  "description": "Bower packaging compiler",
+  "name": "bower-bundler",
+  "version": "0.0.1",
+  "description": "Bundles all your bower libraries based on the right dependency. ",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Wouter Wessendorp",
+  "license": "MIT",
+  "files": [
+    "index.js",
+    "bin"
+  ],
+  "bin": "./bin/bower-bundler.js",
   "dependencies": {
+    "cli": "^0.11.2",
     "concat-files": "^0.1.0",
     "optimist": "^0.6.1"
   }

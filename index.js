@@ -1,5 +1,4 @@
 var argv = require('optimist').argv;
-
 var fs = require("fs");
 var path = require("path");
 var concat = require("concat-files");
