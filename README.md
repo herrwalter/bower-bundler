@@ -1,4 +1,5 @@
-**bower-bundler**
+bower-bundler
+=========================================================
 This plugin will help you bundle your bower libraries to a giving path with the knowledge of the dependecy priorities.
 
 **Installation**
