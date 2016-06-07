@@ -1,6 +1,8 @@
 bower-bundler
 =========================================================
 This plugin will help you bundle your bower libraries to a giving path with the knowledge of the dependecy priorities.
+After a bower install, all you need is a bower-bundler. All the dependecies are concatted to one file.
+No more defining your libraries in a task-runner.
 
 **Installation**
 
