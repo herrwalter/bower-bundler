@@ -1,10 +1,12 @@
-***Installation***
+*Installation*
+
 ```
 npm install -g bower-bundler
 ```
 
 
-***Usage***
+*Usage*
+
 This plugin will help you bundle your bower libraries.
 When you have node installed, simply use `bower-bundler` in the root folder where you're bower file is located.
 
